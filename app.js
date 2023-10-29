@@ -22,8 +22,8 @@ document.getElementById('levels-button').addEventListener('click', () => {
     displayLevels();
 });
 
-document.getElementById('settings-button').addEventListener('click', () => {
-    
+document.getElementById('restart').addEventListener('click', () => {
+    restart();
 });
 
 soundOnOff.addEventListener('click', () => {
@@ -52,11 +52,18 @@ function exit(){
         window.close();
     }
 }
+// restart
+function restart(){
+    currentLevel = 1;
+    alert("Restarted");
+}
 // start
 function startLevel(level) {
     levelsMenu.style.display = 'none';
     gameScreen.style.display = 'block';
-    currentLevel = level;
+    if(level>=currentLevel){
+        currentLevel = level;
+    }
     loadLevel(level);
 }
 // display
@@ -64,7 +71,7 @@ function displayLevels() {
     levelsMenu.innerHTML = '';
     const arrow = document.createElement('button');
     arrow.className = 'backarrow';
-    arrow.innerText='<--';
+    arrow.innerText='GO BACK';
     arrow.addEventListener('click', () => {
         gameScreen.innerHTML="";
         mainMenu.style.display = 'flex';
@@ -86,8 +93,9 @@ function displayLevels() {
             levelIcon.style.opacity ='0.5';
             levelIcon.disabled = true;
         }
-
+        
         levelsMenu.appendChild(levelIcon);
+        levelsMenu.appendChild(arrow);
     }
 }
 // handleanswer
